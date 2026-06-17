@@ -9,13 +9,23 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .gradient-bg { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+        /* Smooth zoom animation for modal opening */
+        @keyframes zoomIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .animate-zoom-in {
+            animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body class="gradient-bg text-slate-800 pb-20">
 
-    <nav class="sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-slate-200 p-4 shadow-sm">
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md z-40 border-b border-slate-200 p-4 shadow-sm">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="font-bold text-xl text-blue-900">🇭🇺 Ungarn Reise 2026</h1>
+            <h1 class="font-bold text-xl text-blue-900 flex items-center gap-2">
+                <span>🇭🇺</span> Ungarn Reise 2026
+            </h1>
             <div class="space-x-4 text-sm font-medium hidden md:block">
                 <a href="#budapest" class="hover:text-blue-600 transition">Budapest</a>
                 <a href="#balaton" class="hover:text-blue-600 transition">Balaton</a>
@@ -44,11 +54,14 @@
                 <span class="text-4xl">🏙️</span> Budapest (3.8. - 6.8.)
             </h2>
             
+            <!-- Budapest Accommodation Card -->
             <div class="bg-blue-900 text-white p-8 rounded-3xl mb-12 shadow-lg">
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
                         <h3 class="font-bold text-2xl mb-4">Airbnb Unterkunft</h3>
-                        <p class="text-blue-100 mb-4 text-lg"><a href="https://www.airbnb.de/rooms/958672801236776643?source_impression_id=p3_1781700994_P3OIY2VcrNctPBZV" target="_blank" class="underline hover:text-blue-300">Apartment in Budapest</a></p>
+                        <p class="text-blue-100 mb-4 text-lg">
+                            <a href="https://www.airbnb.de/rooms/958672801236776643?source_impression_id=p3_1781700994_P3OIY2VcrNctPBZV" target="_blank" class="underline hover:text-blue-300">Apartment in Budapest</a>
+                        </p>
                         <p class="text-blue-200 text-sm mb-4">📍 <a href="https://www.google.com/maps/search/?api=1&query=Ferenc+körút+32,1092+Budapest" target="_blank" class="underline hover:text-white">Ferenc körút 32, 1092 Budapest</a></p>
                         <p class="opacity-80">Zentrale Lage für unsere Stadterkundungen.</p>
                     </div>
@@ -64,161 +77,210 @@
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Budapest Spots -->
+                <!-- Budapest Card 1 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
-                    <img src="https://cdn-imgix.headout.com/media/images/8cc3c66d00fbb88839db439033783b15-This%20is%20a%20Photograph%20of%20Budapest%20Parliament.jpg?auto=compress%2Cformat&w=1440&h=840&q=90&crop=faces&fit=crop" class="w-full h-56 object-cover" alt="Parlament">
+                    <img src="https://cdn-imgix.headout.com/media/images/8cc3c66d00fbb88839db439033783b15-This%20is%20a%20Photograph%20of%20Budapest%20Parliament.jpg?auto=compress%2Cformat&w=1440&h=840&q=90&crop=faces&fit=crop" class="w-full h-56 object-cover" alt="Parlamentsgebäude">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Parlamentsgebäude</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Ungarisches+Parlamentsgebäude+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Das neugotische Wahrzeichen direkt an der Donau ist eines der größten Regierungsgebäude der Welt und beherbergt die ungarischen Kronjuwelen. Für Innenbesichtigungen mit einer Führung solltest du Tickets unbedingt weit im Voraus online buchen.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Parlamentsgebäude</h3>
+                            <button onclick="openInfoModal('Parlamentsgebäude', 'Das neugotische Wahrzeichen direkt an der Donau ist eines der größten Regierungsgebäude der Welt und beherbergt die ungarischen Kronjuwelen. Für Innenbesichtigungen mit einer Führung solltest du Tickets unbedingt weit im Voraus online buchen.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Ungarisches+Parlamentsgebäude+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
                 
+                <!-- Budapest Card 2 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://images.trvl-media.com/place/553248621533040832/7628b4de-e7c7-493b-a825-dfe27d43336e.jpg" class="w-full h-56 object-cover" alt="Freiheitsplatz">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Freiheitsplatz</h3>
-                        <a href="https://maps.app.goo.gl/XXWuf7iE1AWZGSS58" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Dieser zentrale Platz verbindet eine friedliche Parkanlage mit geschichtsträchtigen Gebäuden wie der US-Botschaft und der ungarischen Nationalbank. Hier stehen zudem das markante sowjetische Ehrenmal sowie ein interaktiver Springbrunnen, der sich bei Annäherung teilt.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Freiheitsplatz</h3>
+                            <button onclick="openInfoModal('Freiheitsplatz', 'Dieser zentrale Platz verbindet eine friedliche Parkanlage mit geschichtsträchtigen Gebäuden wie der US-Botschaft und der ungarischen Nationalbank. Hier stehen zudem das markante sowjetische Ehrenmal sowie ein interaktiver Springbrunnen, der sich bei Annäherung teilt.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://maps.app.goo.gl/XXWuf7iE1AWZGSS58" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 3 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://www.hunterirrigation.com/sites/default/files/Kossuth-Square.jpg" class="w-full h-56 object-cover" alt="Kossuth-Lajos-Platz">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Kossuth-Lajos-Platz</h3>
-                        <a href="https://maps.app.goo.gl/zfABPVsHcTEL5yTg8" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Der weitläufige, komplett autofreie Platz erstreckt sich vor der monumentalen Fassade des Parlamentsgebäudes. Er dient als Schauplatz für staatliche Zeremonien und beherbergt mehrere historische Denkmäler sowie eine unterirdische Gedenkstätte.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Kossuth-Lajos-Platz</h3>
+                            <button onclick="openInfoModal('Kossuth-Lajos-Platz', 'Der weitläufige, komplett autofreie Platz erstreckt sich vor der monumentalen Fassade des Parlamentsgebäudes. Er dient als Schauplatz für staatliche Zeremonien und beherbergt mehrere historische Denkmäler sowie eine unterirdische Gedenkstätte.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://maps.app.goo.gl/zfABPVsHcTEL5yTg8" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 4 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://media.tourispo.com/images/ecu/entity/e_sight/ausflugsziel_fischerbastei-in-budapest_n73489-177714-0_pan.jpg" class="w-full h-56 object-cover" alt="Fischerbastei">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Fischerbastei</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Fischerbastei+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Das neoromanische Monument auf dem Burgberg erinnert mit seinen sieben weißen Türmen an eine märchenhafte Burg. Es wurde um 1900 erbaut und bietet einen der schönsten Panoramablicke über die Donau und den Stadtteil Pest.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Fischerbastei</h3>
+                            <button onclick="openInfoModal('Fischerbastei', 'Das neoromanische Monument auf dem Burgberg erinnert mit seinen sieben weißen Türmen an eine märchenhafte Burg. Es wurde um 1900 erbaut und bietet einen der schönsten Panoramablicke über die Donau und den Stadtteil Pest.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Fischerbastei+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 5 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
-                    <img src="https://silver-line.hu/wp-content/uploads/2019/10/Chain-bridge-Budapest-Hungary.jpg" class="w-full h-56 object-cover" alt="Széchenyi Kettenbrücke">
+                    <img src="https://silver-line.hu/wp-content/uploads/2019/10/Chain-bridge-Budapest-Hungary.jpg" class="w-full h-56 object-cover" alt="Kettenbrücke">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Kettenbrücke</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Széchenyi+Kettenbrücke+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Als älteste dauerhafte Brücke Budapests verbindet das historische Bauwerk seit 1849 die Stadtteile Buda und Pest. Bewacht von großen Löwenstatuen aus Stein, erstrahlt die Hängebrücke besonders in den Abendstunden in hellem Glanz.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Kettenbrücke</h3>
+                            <button onclick="openInfoModal('Kettenbrücke', 'Als älteste dauerhafte Brücke Budapests verbindet das historische Bauwerk seit 1849 die Stadtteile Buda und Pest. Bewacht von großen Löwenstatuen aus Stein, erstrahlt die Hängebrücke besonders in den Abendstunden in hellem Glanz.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Széchenyi+Kettenbrücke+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 6 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://images.squarespace-cdn.com/content/v1/5c32d3a189c172393734742d/1584129685696-CRC6Y38JJQ6GUG2XVLSW/image-asset.jpeg?format=2500w" class="w-full h-56 object-cover" alt="Burg-Labyrinth">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Burg-Labyrinth</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Labyrinth+der+Burg+von+Buda" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Das weit verzweigte, unterirdische Höhlensystem tief unter dem Burgviertel wurde über Jahrhunderte als Weinkeller, Schutzraum und sogar als Gefängnis genutzt. Heute können Besucher die düsteren, teils nebligen Gänge bei einem mystischen Rundgang selbst erkunden.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Burg-Labyrinth</h3>
+                            <button onclick="openInfoModal('Burg-Labyrinth', 'Das weit verzweigte, unterirdische Höhlensystem tief unter dem Burgviertel wurde über Jahrhunderte als Weinkeller, Schutzraum und sogar als Gefängnis genutzt. Heute können Besucher die düsteren, teils nebligen Gänge bei einem mystischen Rundgang selbst erkunden.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Labyrinth+der+Burg+von+Buda" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 7 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://meetmeprograms.hu/wp-content/uploads/2014/11/River_Beatrice_ship_2007_005.jpg" class="w-full h-56 object-cover" alt="Burgpalast">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Burgpalast</h3>
-                        <a href="https://maps.app.goo.gl/yPJJZY32HTLpPEQq8" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Das majestätische Schloss thront unübersehbar auf dem Burgberg und war die Residenz der ungarischen Könige. Heute beherbergt der riesige Gebäudekomplex wichtige Kulturinstitute wie die Ungarische Nationalgalerie und das Historische Museum.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Burgpalast</h3>
+                            <button onclick="openInfoModal('Burgpalast', 'Das majestätische Schloss thront unübersehbar auf dem Burgberg und war die Residenz der ungarischen Könige. Heute beherbergt der riesige Gebäudekomplex wichtige Kulturinstitute wie die Ungarische Nationalgalerie und das Historische Museum.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://maps.app.goo.gl/yPJJZY32HTLpPEQq8" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 8 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://www.budapestinfo.hu/storage/content-pages/FztpEB0URIreRHAVCb2jUGAtGtAkCRZdMLl1YV4c.jpg" class="w-full h-56 object-cover" alt="Heldenplatz">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Heldenplatz</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Heldenplatz+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Der monumentale Platz am Ende der Andrássy-Straße würdigt mit dem tausendjährigen Jahrtausenddenkmal die Staatsgründer und wichtigsten Könige Ungarns. Flankiert wird der weitläufige Platz vom Museum der Bildenden Künste und der Kunsthalle.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Heldenplatz</h3>
+                            <button onclick="openInfoModal('Heldenplatz', 'Der monumentale Platz am Ende der Andrássy-Straße würdigt mit dem tausendjährigen Jahrtausenddenkmal die Staatsgründer und wichtigsten Könige Ungarns. Flankiert wird der weitläufige Platz vom Museum der Bildenden Künste und der Kunsthalle.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Heldenplatz+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 9 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://i0.wp.com/www.theroadtoanywhere.com/wp-content/uploads/2024/11/Vajdahunyad-Castle-Palace-View.jpg?fit=1600%2C1065&ssl=1" class="w-full h-56 object-cover" alt="Burg Vajdahunyad">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Burg Vajdahunyad</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Burg+Vajdahunyad+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Die romantische Burg liegt mitten im Stadtpark und vereint verschiedene ungarische Baustile von der Romanik bis zum Barock. Ursprünglich aus Holz und Pappe für eine Ausstellung gebaut, faszinierte sie die Menschen so sehr, dass sie aus Stein neu errichtet wurde.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Burg Vajdahunyad</h3>
+                            <button onclick="openInfoModal('Burg Vajdahunyad', 'Die romantische Burg liegt mitten im Stadtpark und vereint verschiedene ungarische Baustile von der Romanik bis zum Barock. Ursprünglich aus Holz und Pappe für eine Ausstellung gebaut, faszinierte sie die Menschen so sehr, dass sie aus Stein neu errichtet wurde.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Burg+Vajdahunyad+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 10 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://www.budapestinfo.hu/storage/content-pages/8Ic4V17U22U6U0kG3fLLTxF4pvNil71ObGG5cjEb.jpg" class="w-full h-56 object-cover" alt="Ungarische Staatsoper">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Ungarische Staatsoper</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Ungarische+Staatsoper+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Das Prachtgebäude im Stil der Neorenaissance zählt zu den architektonischen Meisterwerken auf der berühmten Andrássy-Straße. Der hufeisenförmige Zuschauerraum ist weltbekannt für seine hervorragende Akustik und seine opulenten Goldverzierungen.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Ungarische Staatsoper</h3>
+                            <button onclick="openInfoModal('Ungarische Staatsoper', 'Das Prachtgebäude im Stil der Neorenaissance zählt zu den architektonischen Meisterwerken auf der berühmten Andrássy-Straße. Der hufeisenförmige Zuschauerraum ist weltbekannt für seine hervorragende Akustik und seine opulenten Goldverzierungen.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Ungarische+Staatsoper+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 11 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://capitalshooting.eu/wp-content/uploads/2025/11/St.Stephens-Basilica-Budapest-Landmark.webp" class="w-full h-56 object-cover" alt="St.-Stephans-Basilika">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">St.-Stephans-Basilika</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=St.-Stephans-Basilika+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Die größte Kirche Budapests fasziniert mit ihrer riesigen Kuppel, die du für einen Rundumblick über die Stadt besteigen kannst. In ihrem Inneren wird die einbalsamierte rechte Hand des heiligen Königs Stefan, des Staatsgründers Ungarns, als Reliquie aufbewahrt.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">St.-Stephans-Basilika</h3>
+                            <button onclick="openInfoModal('St.-Stephans-Basilika', 'Die größte Kirche Budapests fasziniert mit ihrer riesigen Kuppel, die du für einen Rundumblick über die Stadt besteigen kannst. In ihrem Inneren wird die einbalsamierte rechte Hand des heiligen Königs Stefan, des Staatsgründers Ungarns, als Reliquie aufbewahrt.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=St.-Stephans-Basilika+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 12 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://kondicad.hu/wp-content/uploads/2022/08/arena-plaza-budapest-1-1844x1153.jpg" class="w-full h-56 object-cover" alt="Arena Mall">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Arena Mall</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Arena+Mall+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Dieses riesige Einkaufszentrum nahe dem Ostbahnhof ist eine der größten Shopping-Malls in ganz Mitteleuropa. Neben unzähligen internationalen Modegeschäften bietet sie einen großen Food-Court und ein modernes IMAX-Kino.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Arena Mall</h3>
+                            <button onclick="openInfoModal('Arena Mall', 'Dieses riesige Einkaufszentrum nahe dem Ostbahnhof ist eine der größten Shopping-Malls in ganz Mitteleuropa. Neben unzähligen internationalen Modegeschäften bietet sie einen großen Food-Court und ein modernes IMAX-Kino.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Arena+Mall+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 13 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://image.geo.de/30148442/t/Td/v4/w1440/r0/-/06-grosse-synagoge-budapest-red-s-390628279-jpg--84579-.jpg" class="w-full h-56 object-cover" alt="Große Synagoge">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Große Synagoge</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Große+Synagoge+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Das beeindruckende Bauwerk im maurischen Stil ist die größte Synagoge in Europa und bietet Platz für rund 3.000 Menschen. Zum weitläufigen Komplex gehören auch ein jüdisches Museum, ein Friedhof und das berührende Holocaust-Mahnmal „Baum des Lebens“.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Große Synagoge</h3>
+                            <button onclick="openInfoModal('Große Synagoge', 'Das beeindruckende Bauwerk im maurischen Stil ist die größte Synagoge in Europa und bietet Platz für rund 3.000 Menschen. Zum weitläufigen Komplex gehören auch ein jüdisches Museum, ein Friedhof und das berührende Holocaust-Mahnmal „Baum des Lebens“.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Große+Synagoge+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 14 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://wunderbaresungarn.de/wp-content/uploads/2022/03/nyugati-palyaudvar-ujjaszuletik-brit-epitesziroda-mav-vonatallomas-csodalatosmagyarorszag3.jpeg" class="w-full h-56 object-cover" alt="Westbahnhof">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Westbahnhof</h3>
-                        <a href="https://maps.app.goo.gl/QeVmUJS3rqcpprXT8" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Das historische Bahnhofsgebäude besticht durch seine elegante Glas- und Eisenkonstruktion, die Ende des 19. Jahrhunderts vom Büro des berühmten Gustave Eiffel entworfen wurde. Ein besonderes Highlight im Inneren ist die prachtvolle Filiale einer bekannten Fast-Food-Kette, die als eine der schönsten weltweit gilt.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Westbahnhof</h3>
+                            <button onclick="openInfoModal('Westbahnhof', 'Das historische Bahnhofsgebäude besticht durch seine elegante Glas- und Eisenkonstruktion, die Ende des 19. Jahrhunderts vom Büro des berühmten Gustave Eiffel entworfen wurde. Ein besonderes Highlight im Inneren ist die prachtvolle Filiale einer bekannten Fast-Food-Kette, die als eine der schönsten weltweit gilt.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://maps.app.goo.gl/QeVmUJS3rqcpprXT8" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 15 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/ae/f3/d2/see-the-city-park-from.jpg?w=1000&h=-1&s=1" class="w-full h-56 object-cover" alt="Stadtwäldchen">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Stadtwäldchen</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Városliget+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Der weitläufige Stadtpark ist eine grüne Oase im Herzen von Budapest und bietet Erholung sowie zahlreiche Attraktionen auf einem Fleck. Hier findest du neben dem berühmten Széchenyi-Heilbad auch den Zoo und das futuristische Haus der ungarischen Musik.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Stadtwäldchen</h3>
+                            <button onclick="openInfoModal('Stadtwäldchen', 'Der weitläufige Stadtpark ist eine grüne Oase im Herzen von Budapest und bietet Erholung sowie zahlreiche Attraktionen auf einem Fleck. Hier findest du neben dem berühmten Széchenyi-Heilbad auch den Zoo und das futuristische Haus der ungarischen Musik.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Városliget+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
 
+                <!-- Budapest Card 16 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Funicular%2C_2013_Budapest_%28169%29_%2813229199144%29.jpg" class="w-full h-56 object-cover" alt="Standseilbahn">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900">Standseilbahn</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Budavári+Sikló+Budapest" target="_blank" class="text-xs text-blue-600 block mb-3 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-sm text-slate-600 leading-relaxed">Die historische Standseilbahn bringt Fahrgäste bereits seit dem Jahr 1870 in einer kurzen, steilen Fahrt hinauf zum Burgviertel. Während der Fahrt im nostalgischen Holzwagen genießt du einen wunderbaren Ausblick auf die Kettenbrücke und die Donau.</p>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-xl text-blue-900">Standseilbahn</h3>
+                            <button onclick="openInfoModal('Standseilbahn', 'Die historische Standseilbahn bringt Fahrgäste bereits seit dem Jahr 1870 in einer kurzen, steilen Fahrt hinauf zum Burgviertel. Während der Fahrt im nostalgischen Holzwagen genießt du einen wunderbaren Ausblick auf die Kettenbrücke und die Donau.')" class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-sm transition focus:outline-none" title="Mehr Informationen">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Budavári+Sikló+Budapest" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
             </div>
 
             <!-- Restaurant Section -->
             <div class="mt-12 bg-slate-900 text-slate-100 p-8 rounded-2xl">
-                <h3 class="font-bold text-xl mb-6">🍽️ Restaurant-Tipps Budapest</h3>
+                <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
+                    <span>🍽️</span> Restaurant-Tipps Budapest
+                </h3>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
                         <img src="https://semmiextra.hu/files/galleries/0/0/2/2/_thumb/2-gallery-img-07-large-fullsize_webp.webp" class="w-full h-40 object-cover rounded-lg mb-4" alt="Semmi Extra">
                         <h4 class="font-bold text-lg mb-1">Semmi Extra és egy kis Kert</h4>
                         <p class="text-xs text-blue-300 mb-2">📍 <a href="https://www.google.com/maps/place/Semmi+Extra+és+egy+kis+Kert/data=!4m2!3m1!1s0x4741dfd1646299f1:0x546e8c454e92e597" target="_blank" class="underline hover:text-white">Budapest, Lajos u. 46, 1036 Ungarn</a> | 💰 2.000-10.000ft</p>
-                        <p class="text-sm text-slate-300 leading-relaxed">Dieses gemütliche Restaurant in Óbuda (Lajos u. 46) besticht durch seine entspannte Atmosphäre und einen charmanten, versteckten Innenhof. Es ist bekannt für seine familienfreundliche Umgebung und eine vielseitige Speisekarte, die von saftigen Burgern bis zu klassischen ungarischen Gerichten reicht.</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">Dieses gemütliche Restaurant in Óbuda besticht durch seine entspannte Atmosphäre und einen charmanten, versteckten Innenhof. Es ist bekannt für seine familienfreundliche Umgebung und eine vielseitige Speisekarte, die von saftigen Burgern bis zu klassischen ungarischen Gerichten reicht.</p>
                     </div>
                     <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
                         <img src="https://pubtourist.com/wp-content/uploads/sites/2/2017/02/DSC_3001.jpg" class="w-full h-40 object-cover rounded-lg mb-4" alt="Rizmajer Beerhouse">
@@ -247,121 +309,286 @@
                 <span class="text-4xl">🌊</span> Balaton-Tour (9.8. - 11.8.)
             </h2>
 
+            <!-- Balaton Accommodation Card -->
             <div class="bg-blue-900 text-white p-8 rounded-3xl mb-12 shadow-lg">
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
                         <h3 class="font-bold text-2xl mb-4">Airbnb Unterkunft</h3>
-                        <p class="text-blue-100 mb-4 text-lg"><a href="https://www.airbnb.de/rooms/585786007522470529?source_impression_id=p3_1781701026_P3VasV0AWCRbMm2G" target="_blank" class="underline hover:text-blue-300">Apartment in Balatonfűzfő</a></p>
+                        <p class="text-blue-100 mb-4 text-lg">
+                            <a href="https://www.airbnb.de/rooms/585786007522470529?source_impression_id=p3_1781701026_P3VasV0AWCRbMm2G" target="_blank" class="underline hover:text-blue-300">Apartment in Balatonfűzfő</a>
+                        </p>
                         <p class="text-blue-200 text-sm mb-4">📍 <a href="https://www.google.com/maps/place/Völgy+u.+13,+Balatonfűzfő,+8175+Ungarn/data=!4m2!3m1!1s0x4769062383c318ab:0x5e2978d3876e5d79" target="_blank" class="underline hover:text-white">Völgy utca 13, 8175 Balatonfűzfő</a></p>
                         <p class="opacity-80">Ideal gelegen als Basis für unsere Ausflüge rund um den See.</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-585786007522470529/original/be3800d7-34d4-4af5-b874-161a6b1e314d.jpeg?im_w=1200" class="rounded-xl w-full h-48 object-cover border-4 border-blue-800" alt="Airbnb 1">
-                        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-585786007522470529/original/25397488-e9cb-4f9f-a21d-859842ef967c.jpeg?im_w=1440" class="rounded-xl w-full h-48 object-cover border-4 border-blue-800" alt="Airbnb 2">
+                        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-585786007522470529/original/be3800d7-34d4-4af5-b874-161a6b1e314d.jpeg?im_w=1200" class="rounded-xl w-full h-48 object-cover border-4 border-blue-800" alt="Airbnb Balaton 1">
+                        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-585786007522470529/original/25397488-e9cb-4f9f-a21d-859842ef967c.jpeg?im_w=1440" class="rounded-xl w-full h-48 object-cover border-4 border-blue-800" alt="Airbnb Balaton 2">
                     </div>
                 </div>
             </div>
 
             <div class="bg-white rounded-3xl p-8 mb-12 shadow-sm border border-slate-100">
-                <h3 class="text-xl font-bold mb-6 text-slate-800">Reiseplan Balaton</h3>
-                <div class="space-y-8">
+                <h3 class="text-2xl font-bold mb-8 text-slate-900">Reiseplan Balaton</h3>
+                <div class="space-y-12">
+                    
+                    <!-- Tag 1 -->
                     <div class="relative pl-8 border-l-2 border-blue-200">
                         <div class="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full"></div>
-                        <h4 class="font-bold text-lg mb-2">Tag 1 (09.08. - Anreise & Veszprém)</h4>
-                        <p class="text-slate-600 mb-4">Anreise via Veszprém, Check-in in Balatonfűzfő, abends Tagore Promenade in Balatonfüred.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://www.veszpreminfo.hu/public/media/place_label/images/xs/25aad40cca285ca088463185f058a326a8f2625b.jpg" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Veszprém Burgviertel</p><a href="https://www.google.com/maps/search/?api=1&query=Veszprém+Várnegyed" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Das historische Burgviertel von Veszprém erstreckt sich auf einem schmalen Felsrücken und ist reich an prachtvollen Barockbauten, Kirchen und Erzbischofspalästen. Durchschreitet man das markante Heldentor, fühlt man sich direkt in vergangene Jahrhunderte zurückversetzt.</p></div></div>
-                             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://wunderbarerbalaton.de/wp-content/uploads/2024/05/balatonfured-rozsakert-tavasz-tagore-setany-balaton-jegyvasarlas9-csodalatosbalaton.jpg" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Tagore Promenade</p><a href="https://www.google.com/maps/search/?api=1&query=Tagore+Promenade+Balatonfüred" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Diese berühmte, schattige Flaniermeile am Seeufer in Balatonfüred lädt mit ihren riesigen Platanen, bunten Blumenbeeten und Cafés zum Spaziergängen ein. Benannt wurde sie nach dem indischen Literaturnobelpreisträger Rabindranath Tagore.</p></div></div>
+                        <h4 class="font-bold text-lg text-slate-900 mb-1">Tag 1 (Sonntag, 09.08. - Anreise & Veszprém)</h4>
+                        <p class="text-slate-600 mb-6">Anreise via Veszprém, Check-in in Balatonfűzfő, abends Tagore Promenade in Balatonfüred.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shadow-sm">
+                                 <img src="https://www.veszpreminfo.hu/public/media/place_label/images/xs/25aad40cca285ca088463185f058a326a8f2625b.jpg" class="w-full h-48 object-cover" alt="Veszprém Burgviertel">
+                                 <div class="p-4">
+                                     <div class="flex items-center justify-between mb-1">
+                                         <p class="font-bold text-sm text-slate-800">Veszprém Burgviertel</p>
+                                         <button onclick="openInfoModal('Veszprém Burgviertel', 'Das historische Burgviertel von Veszprém erstreckt sich auf einem schmalen Felsrücken und ist reich an prachtvollen Barockbauten, Kirchen und Erzbischofspalästen. Durchschreitet man das markante Heldentor, fühlt man sich direkt in vergangene Jahrhunderte zurückversetzt.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                                     </div>
+                                     <a href="https://www.google.com/maps/search/?api=1&query=Veszprém+Várnegyed" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                                 </div>
+                             </div>
+                             <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shadow-sm">
+                                 <img src="https://wunderbarerbalaton.de/wp-content/uploads/2024/05/balatonfured-rozsakert-tavasz-tagore-setany-balaton-jegyvasarlas9-csodalatosbalaton.jpg" class="w-full h-48 object-cover" alt="Tagore Promenade">
+                                 <div class="p-4">
+                                     <div class="flex items-center justify-between mb-1">
+                                         <p class="font-bold text-sm text-slate-800">Tagore Promenade</p>
+                                         <button onclick="openInfoModal('Tagore Promenade', 'Diese berühmte, schattige Flaniermeile am Seeufer in Balatonfüred lädt mit ihren riesigen Platanen, bunten Blumenbeeten und Cafés zum Spaziergängen ein. Benannt wurde sie nach dem indischen Literaturnobelpreisträger Rabindranath Tagore, der hier im Jahr 1926 von einer Herzkrankheit geheilt wurde.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                                     </div>
+                                     <a href="https://www.google.com/maps/search/?api=1&query=Tagore+Promenade+Balatonfüred" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                                 </div>
+                             </div>
                         </div>
                     </div>
+
+                    <!-- Tag 2 -->
                     <div class="relative pl-8 border-l-2 border-blue-200">
                         <div class="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full"></div>
-                        <h4 class="font-bold text-lg mb-2">Tag 2 (10.08. - Spiritualität & Karst)</h4>
-                        <p class="text-slate-600 mb-4">Vormittag: Halbinsel Tihany (Abtei und Museum). Nachmittag: Fahrt nach Tapolca. Vorab gebuchte Bootstour auf dem Höhlensee, gefolgt von einem frühen Abendessen am Ufer des Malom-tó.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://wunderbarerbalaton.de/wp-content/uploads/2023/06/tihany-bences-apatsag-nyar-programok-jegyvasarlas-csodalatosbalaton3.jpg" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Tihany Abtei</p><a href="https://www.google.com/maps/search/?api=1&query=Tihanyi+Apátság" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Die barocke Benediktinerabtei thront majestätisch auf einer Kuppe der Halbinsel Tihany und gilt als eines der wichtigsten Wahrzeichen am Plattensee. Ihre Gründung geht bereits auf das Jahr 1055 zurück.</p></div></div>
-                             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://wunderbarerbalaton.de/wp-content/uploads/2019/09/Tapolcai-Tavasbarlang-Kozkincs-Kiemelten-Vedett-CsodalatosMagyarorszag.jpg" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Tapolca Höhlensee</p><a href="https://www.google.com/maps/search/?api=1&query=Tapolca+Höhlensee" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Dieses einzigartige unterirdische Höhlensystem erstreckt sich direkt unter den Straßen der Stadt Tapolca. Das absolute Highlight ist eine abenteuerliche Bootsfahrt im eigenen Ruderboot auf dem kristallklaren Wasser.</p></div></div>
-                             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://wunderbarerbalaton.de/wp-content/uploads/2019/11/tapolca-balaton-felvidek-barlang-malom-to-szanto-roland-csodalatosbalaton.jpg" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Tapolca Mühlenteich</p><a href="https://www.google.com/maps/search/?api=1&query=Tapolca+Malom-tó" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Der romantische Mühlenteich bildet das Herzstück der historischen Altstadt und verzaubert mit seiner fast mediterranen Kulisse. Gesäumt von alten bunten Häusern lädt das Ufer zum Verweilen ein.</p></div></div>
+                        <h4 class="font-bold text-lg text-slate-900 mb-1">Tag 2 (Montag, 10.08. - Spiritualität & Karst)</h4>
+                        <p class="text-slate-600 mb-6">Vormittag: Halbinsel Tihany (Abtei und Museum). Nachmittag: Fahrt nach Tapolca. Vorab gebuchte Bootstour auf dem Höhlensee, gefolgt von einem frühen Abendessen am Ufer des Malom-tó.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                             <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shadow-sm">
+                                 <img src="https://wunderbarerbalaton.de/wp-content/uploads/2023/06/tihany-bences-apatsag-nyar-programok-jegyvasarlas-csodalatosbalaton3.jpg" class="w-full h-48 object-cover" alt="Tihany Abtei">
+                                 <div class="p-4">
+                                     <div class="flex items-center justify-between mb-1">
+                                         <p class="font-bold text-sm text-slate-800">Tihany Abtei</p>
+                                         <button onclick="openInfoModal('Tihany Abtei', 'Die barocke Benediktinerabtei thront majestätisch auf einer Kuppe der Halbinsel Tihany und gilt als eines der wichtigsten Wahrzeichen am Plattensee. Ihre Gründung geht bereits auf das Jahr 1055 zurück, und von ihrer Aussichtsplattform aus genießt man einen unvergesslichen Panoramablick über den See.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                                     </div>
+                                     <a href="https://www.google.com/maps/search/?api=1&query=Tihanyi+Apátság" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                                 </div>
+                             </div>
+                             <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shadow-sm">
+                                 <img src="https://wunderbarerbalaton.de/wp-content/uploads/2019/09/Tapolcai-Tavasbarlang-Kozkincs-Kiemelten-Vedett-CsodalatosMagyarorszag.jpg" class="w-full h-48 object-cover" alt="Tapolca Höhlensee">
+                                 <div class="p-4">
+                                     <div class="flex items-center justify-between mb-1">
+                                         <p class="font-bold text-sm text-slate-800">Tapolca Höhlensee</p>
+                                         <button onclick="openInfoModal('Tapolca Höhlensee', 'Dieses einzigartige unterirdische Höhlensystem erstreckt sich direkt unter den Straßen der Stadt Tapolca. Das absolute Highlight ist eine abenteuerliche Bootsfahrt im eigenen Ruderboot auf dem kristallklaren, von Scheinwerfern beleuchteten Wasser.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                                     </div>
+                                     <a href="https://www.google.com/maps/search/?api=1&query=Tapolca+Höhlensee" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                                 </div>
+                             </div>
+                             <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shadow-sm">
+                                 <img src="https://wunderbarerbalaton.de/wp-content/uploads/2019/11/tapolca-balaton-felvidek-barlang-malom-to-szanto-roland-csodalatosbalaton.jpg" class="w-full h-48 object-cover" alt="Tapolca Mühlenteich">
+                                 <div class="p-4">
+                                     <div class="flex items-center justify-between mb-1">
+                                         <p class="font-bold text-sm text-slate-800">Tapolca Mühlenteich</p>
+                                         <button onclick="openInfoModal('Tapolca Mühlenteich', 'Der romantische Mühlenteich bildet das Herzstück der historischen Altstadt und verzaubert mit seiner fast mediterranen Kulisse. Gesäumt von alten bunten Häusern, einer plätschernden Fontäne und der namensgebenden historischen Wassermühle lädt das Ufer zum Verweilen ein.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                                     </div>
+                                     <a href="https://www.google.com/maps/search/?api=1&query=Tapolca+Malom-tó" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                                 </div>
+                             </div>
                         </div>
                     </div>
+
+                    <!-- Tag 3 -->
                     <div class="relative pl-8 border-l-2 border-blue-200">
                         <div class="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full"></div>
-                        <h4 class="font-bold text-lg mb-2">Tag 3 (11.08. - Adelige Pracht & Festung)</h4>
-                        <p class="text-slate-600 mb-4">Vormittag: Aufstieg zur Burg Szigliget vor der großen Mittagshitze. Nachmittag: Fahrt nach Keszthely. Ausgiebige Besichtigung des Festetics-Schlosses.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://wunderbarerbalaton.de/wp-content/uploads/2022/06/szigliget-var-balaton-panorama-kirandulas-csodalatosbalaton.jpg" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Burg Szigliget</p><a href="https://www.google.com/maps/search/?api=1&query=Szigliget+vár" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Die historische Burgruine thront auf einem erloschenen Vulkanberg hoch über dem Nordufer des Plattensees. Nach einem steilen Aufstieg belohnt die Anlage ihre Besucher mit einer fantastischen Rundumaussicht.</p></div></div>
-                             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://img0.oastatic.com/img2/622408376/600x300c/variant.webp" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Festetics-Schloss</p><a href="https://maps.app.goo.gl/MDe8HJjwTtdUcRmD7" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Das barocke Schloss Festetics gehört zu den prächtigsten und meistbesuchten Schlossanlagen Ungarns. Besucher können die prunkvollen Wohnräume und die berühmte Helikon-Bibliothek bewundern.</p></div></div>
+                        <h4 class="font-bold text-lg text-slate-900 mb-1">Tag 3 (Dienstag, 11.08. - Abreise, Adelige Pracht & Festung)</h4>
+                        <p class="text-slate-600 mb-6">Vormittag: Aufstieg zur Burg Szigliget vor der großen Mittagshitze. Nachmittag: Fahrt nach Keszthely. Ausgiebige Besichtigung des Festetics-Schlosses und ggfs. Nebenausstellungen.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shadow-sm">
+                                 <img src="https://wunderbarerbalaton.de/wp-content/uploads/2022/06/szigliget-var-balaton-panorama-kirandulas-csodalatosbalaton.jpg" class="w-full h-48 object-cover" alt="Burg Szigliget">
+                                 <div class="p-4">
+                                     <div class="flex items-center justify-between mb-1">
+                                         <p class="font-bold text-sm text-slate-800">Burg Szigliget</p>
+                                         <button onclick="openInfoModal('Burg Szigliget', 'Die historische Burgruine thront auf einem erloschenen Vulkanberg hoch über dem Nordufer des Plattensees. Nach einem steilen Aufstieg belohnt die mittelalterliche Festungsanlage ihre Besucher mit einer der faszinierendsten Rundumaussichten auf die umliegende Vulkanlandschaft.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                                     </div>
+                                     <a href="https://www.google.com/maps/search/?api=1&query=Szigliget+vár" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                                 </div>
+                             </div>
+                             <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shadow-sm">
+                                 <img src="https://img0.oastatic.com/img2/622408376/600x300c/variant.webp" class="w-full h-48 object-cover" alt="Festetics-Schloss">
+                                 <div class="p-4">
+                                     <div class="flex items-center justify-between mb-1">
+                                         <p class="font-bold text-sm text-slate-800">Festetics-Schloss</p>
+                                         <button onclick="openInfoModal('Festetics-Schloss', 'Das barocke Schloss Festetics gehört zu den prächtigsten und meistbesuchten Schlossanlagen Ungarns. Besucher können neben den prunkvollen fürstlichen Wohnräumen und der bedeutenden Helikon-Bibliothek auch den weitläufigen englischen Schlosspark mit seinem Palmenhaus bewundern.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                                     </div>
+                                     <a href="https://maps.app.goo.gl/MDe8HJjwTtdUcRmD7" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                                 </div>
+                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <h3 class="text-xl font-bold mb-6">Weitere Orte am Balaton</h3>
+            <!-- Additional Balaton Spots -->
+            <h3 class="text-xl font-bold mb-6 text-slate-800">Weitere Orte am Balaton</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100"><img src="https://balatonfuzfoinfo.hu/wp-content/uploads/2025/09/DJI_0173-scaled.jpg" class="w-full h-48 object-cover"><div class="p-4"><p class="font-bold text-sm mb-1">Fövenystrand Balatonfűzfő</p><a href="https://www.google.com/maps/search/?api=1&query=Fövenystrand+Balatonfűzfő" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a><p class="text-xs text-slate-600">Der Fövenystrand am nordöstlichsten Zipfel des Plattensees gilt als besonders familienfreundliches und vielseitiges Strandbad. Neben schattigen Liegewiesen und einem flach abfallenden Ufer locken hier ein großer aufblasbarer Wasser-Erlebnispark sowie eine riesige Wasserrutsche.</p></div></div>
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
+                    <img src="https://balatonfuzfoinfo.hu/wp-content/uploads/2025/09/DJI_0173-scaled.jpg" class="w-full h-48 object-cover" alt="Fövenystrand Balatonfűzfő">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-bold text-sm text-slate-800">Fövenystrand Balatonfűzfő</p>
+                            <button onclick="openInfoModal('Fövenystrand Balatonfűzfő', 'Der Fövenystrand am nordöstlichsten Zipfel des Plattensees gilt als besonders familienfreundliches und vielseitiges Strandbad. Neben schattigen Liegewiesen und einem flach abfallenden Ufer locken hier ein großer aufblasbarer Wasser-Erlebnispark sowie eine riesige Wasserrutsche.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Fövenystrand+Balatonfűzfő" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- General Sights Section -->
         <section id="allgemein" class="mb-12">
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-2 text-slate-900">
                 <span class="text-4xl">🌍</span> Weitere Ziele in Ungarn
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Sights Card 1 -->
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
-                    <img src="https://wunderbaresungarn.de/wp-content/uploads/2022/10/pecs-osz-seta-turazas-oktober-belvaros-latnivalo-szekesegyhaz-dzsami-kalvaria-csodalatosmagyarorszag7.jpg" class="w-full h-48 object-cover">
+                    <img src="https://wunderbaresungarn.de/wp-content/uploads/2022/10/pecs-osz-seta-turazas-oktober-belvaros-latnivalo-szekesegyhaz-dzsami-kalvaria-csodalatosmagyarorszag7.jpg" class="w-full h-48 object-cover" alt="Pécs">
                     <div class="p-4">
-                        <p class="font-bold text-sm mb-1">Pécs (Altstadt & Árkád)</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Pécs" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-xs text-slate-600 mt-2">Die historische Altstadt von Pécs fasziniert Besucher mit ihren mediterranen Plätzen und architektonischen Schätzen wie der markanten Moschee-Kirche. Direkt daneben bietet das moderne Árkád Shoppingcenter eine riesige Auswahl an Modegeschäften und kulinarischen Angeboten für einen perfekten Einkaufstag.</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-bold text-sm text-slate-800">Pécs (Altstadt & Árkád)</p>
+                            <button onclick="openInfoModal('Pécs (Altstadt & Árkád Shoppingcenter)', 'Die historische Altstadt von Pécs fasziniert Besucher mit ihren mediterranen Plätzen und architektonischen Schätzen wie der markanten Moschee-Kirche. Direkt daneben bietet das moderne Árkád Shoppingcenter eine riesige Auswahl an Modegeschäften und kulinarischen Angeboten für einen perfekten Einkaufstag.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Pécs" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
+
+                <!-- Sights Card 2 -->
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
-                    <img src="https://www.viragfurdo.hu/static/files/keptar/Strand/DJI_0701_benke.jpg" class="w-full h-48 object-cover">
+                    <img src="https://www.viragfurdo.hu/static/files/keptar/Strand/DJI_0701_benke.jpg" class="w-full h-48 object-cover" alt="Kaposvár">
                     <div class="p-4">
-                        <p class="font-bold text-sm mb-1">Virágfürdő Kaposvár</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Kaposvár+Virágfürdő" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-xs text-slate-600 mt-2">Das Virágfürdő in Kaposvár ist ein echtes Paradies für Wasserratten und bietet weitläufige Freibadbecken sowie actionreiche Rutschen. Familien schätzen die modernen Erlebnisbereiche und die großzügigen Liegewiesen zur puren Entspannung unter der Sonne.</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-bold text-sm text-slate-800">Kaposvár Erlebnisfreibad</p>
+                            <button onclick="openInfoModal('Kaposvár Erlebnisfreibad', 'Das Virágfürdő in Kaposvár ist ein echtes Paradies für Wasserratten und bietet weitläufige Freibadbecken sowie actionreiche Rutschen. Familien schätzen die modernen Erlebnisbereiche und die großzügigen Liegewiesen zur puren Entspannung unter der Sonne.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Kaposvár+Virágfürdő" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
+
+                <!-- Sights Card 3 -->
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
-                    <img src="https://thumbs.dreamstime.com/b/eingang-zu-sinsay-gesch%C3%A4ft-salaris-einkaufszentrum-poznan-poland-sep-au%C3%9Fenfassade-des-luxusmode-unternehmensunterschrift-229322293.jpg" class="w-full h-48 object-cover">
+                    <img src="https://thumbs.dreamstime.com/b/eingang-zu-sinsay-gesch%C3%A4ft-salaris-einkaufszentrum-poznan-poland-sep-au%C3%9Fenfassade-des-luxusmode-unternehmensunterschrift-229322293.jpg" class="w-full h-48 object-cover" alt="Szekszárd">
                     <div class="p-4">
-                        <p class="font-bold text-sm mb-1">Einkaufszentrum Szekszárd</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Szekszárd" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-xs text-slate-600 mt-2">Dieses Einkaufszentrum in Szekszárd verbindet trendige Mode zu Schnäppchenpreisen im beliebten Sinsay-Store mit einem vielseitigen Asiamarkt. Besucher finden hier an einem einzigen Ort sowohl Alltagskleidung als auch eine bunte Auswahl an nützlichen Haushaltswaren und Importartikeln.</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-bold text-sm text-slate-800">Einkaufszentrum Szekszárd</p>
+                            <button onclick="openInfoModal('Einkaufszentrum Szekszárd', 'Dieses Einkaufszentrum in Szekszárd verbindet trendige Mode zu Schnäppchenpreisen im beliebten Sinsay-Store mit einem vielseitigen Asiamarkt. Besucher finden hier an einem einzigen Ort sowohl Alltagskleidung als auch eine bunte Auswahl an nützlichen Haushaltswaren und Importartikeln.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Szekszárd" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
+
+                <!-- Sights Card 4 -->
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
-                    <img src="https://mecsekszive.hu/wp-content/uploads/2023/03/abaliget1.jpg" class="w-full h-48 object-cover">
+                    <img src="https://mecsekszive.hu/wp-content/uploads/2023/03/abaliget1.jpg" class="w-full h-48 object-cover" alt="Abaliget">
                     <div class="p-4">
-                        <p class="font-bold text-sm mb-1">Abaliget Tropfsteinhöhle</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Abaligeti+barlang" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-xs text-slate-600 mt-2">Die Abaligethöhle nahe Pécs ist eine faszinierende Tropfsteinhöhle, die für ihre beeindruckenden Kalksteinformationen und ein heilsames Höhlenklima bekannt ist. Ein befestigter Rundweg führt Gäste sicher durch die unterirdische Welt, während das angrenzende Fledermausmuseum spannende Einblicke in die Natur bietet.</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-bold text-sm text-slate-800">Abaliget Tropfsteinhöhle</p>
+                            <button onclick="openInfoModal('Abaliget Tropfsteinhöhle', 'Die Abaligethöhle nahe Pécs ist eine faszinierende Tropfsteinhöhle, die für ihre beeindruckenden Kalksteinformationen und ein heilsames Höhlenklima bekannt ist. Ein befestigter Rundweg führt Gäste sicher durch die unterirdische Welt, während das angrenzende Fledermausmuseum spannende Einblicke in die Natur bietet.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Abaligeti+barlang" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
+
+                <!-- Sights Card 5 -->
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
-                    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHIv8PqBXQDdvE5ckgVWQS1b_EkSB2Lw6O9fJcp_1Dmm4_gn9YHlPilVhtbWxcBkxd8g4XHUz45shb0fMqomUkoa8nm5XNkX3wGpBNH05Icyvhui1xo-djh8Qit8zl2RngqXP4=w540-h312-n-k-no" class="w-full h-48 object-cover">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHIv8PqBXQDdvE5ckgVWQS1b_EkSB2Lw6O9fJcp_1Dmm4_gn9YHlPilVhtbWxcBkxd8g4XHUz45shb0fMqomUkoa8nm5XNkX3wGpBNH05Icyvhui1xo-djh8Qit8zl2RngqXP4=w540-h312-n-k-no" class="w-full h-48 object-cover" alt="Bonyhád">
                     <div class="p-4">
-                        <p class="font-bold text-sm mb-1">Bonyhád</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Bonyhád" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-xs text-slate-600 mt-2">Die beschauliche Altstadt von Bonyhád lädt mit ihren charmanten Straßenzügen und lokalen Geschäften zu einem gemütlichen Bummel ein. Hier verbindet sich traditionelles Kleinstadtflair ideal mit bequemen Einkaufsmöglichkeiten für den täglichen Bedarf.</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-bold text-sm text-slate-800">Bonyhád</p>
+                            <button onclick="openInfoModal('Bonyhád', 'Die beschauliche Altstadt von Bonyhád lädt mit ihren charmanten Straßenzügen und lokalen Geschäften zu einem gemütlichen Bummel ein. Hier verbindet sich traditionelles Kleinstadtflair ideal mit bequemen Einkaufsmöglichkeiten für den täglichen Bedarf.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Bonyhád" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
+
+                <!-- Sights Card 6 -->
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
-                    <img src="https://termalfurdok.com/wp-content/uploads/2018/03/Dombovar-Gunaras-Gyogyfurdo.jpg" class="w-full h-48 object-cover">
+                    <img src="https://termalfurdok.com/wp-content/uploads/2018/03/Dombovar-Gunaras-Gyogyfurdo.jpg" class="w-full h-48 object-cover" alt="Dombóvár">
                     <div class="p-4">
-                        <p class="font-bold text-sm mb-1">Gunaras Heil- und Strandbad</p>
-                        <a href="https://maps.app.goo.gl/DaeW5reSXZARvbtp8" target="_blank" class="text-xs text-blue-600 block mb-2 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
-                        <p class="text-xs text-slate-600 mt-2">Das Gunaras-Heil- und Strandbad in Dombóvár bietet erholsame Thermalbecken sowie abwechslungsreiche Erlebnisbereiche unter freiem Himmel. Es ist der ideale Ort, um im heilkräftigen Wasser zu entspannen oder mit der Familie einen spaßigen Badetag im Grünen zu verbringen.</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-bold text-sm text-slate-800">Gunaras Heil- und Strandbad</p>
+                            <button onclick="openInfoModal('Gunaras Heil- und Strandbad', 'Das Gunaras-Heil- und Strandbad in Dombóvár bietet erholsame Thermalbecken sowie abwechslungsreiche Erlebnisbereiche unter freiem Himmel. Es ist der ideale Ort, um im heilkräftigen Wasser zu entspannen oder mit der Familie einen spaßigen Badetag im Grünen zu verbringen.')" class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-xs transition focus:outline-none">!</button>
+                        </div>
+                        <a href="https://maps.app.goo.gl/DaeW5reSXZARvbtp8" target="_blank" class="text-xs text-blue-600 font-semibold hover:underline">📍 Auf Google Maps ansehen</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Interactive Semi-Transparent Modal Backdrop -->
+    <div id="info-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden justify-center items-center p-4 transition-all duration-300">
+        <!-- Modal Content Box -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100/50 relative max-h-[90vh] overflow-y-auto animate-zoom-in">
+            <!-- Close Button -->
+            <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition p-2 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Modal Header Title -->
+            <h3 id="modal-title" class="text-2xl font-bold text-blue-900 mb-4 pr-8"></h3>
+            
+            <!-- Modal Body Text -->
+            <p id="modal-description" class="text-slate-600 leading-relaxed text-base"></p>
+            
+            <!-- Bottom Close Button -->
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeInfoModal()" class="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition shadow-sm focus:outline-none">Schließen</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="text-center text-slate-500 text-sm py-8">
         Gute Reise! Viel Spaß beim Entdecken. 🇭🇺
     </footer>
 
+    <script>
+        // Open the modal with custom title & description
+        function openInfoModal(title, description) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-description').innerText = description;
+            
+            const modal = document.getElementById('info-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Disable background scroll while modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close the modal
+        function closeInfoModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            
+            // Restore background scrolling
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside of the white modal content box
+        window.onclick = function(event) {
+            const modal = document.getElementById('info-modal');
+            if (event.target === modal) {
+                closeInfoModal();
+            }
+        }
+    </script>
 </body>
 </html>
